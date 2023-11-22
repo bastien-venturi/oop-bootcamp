@@ -1,3 +1,9 @@
+<form method="post">
+    <input type="submit" name="nodiscount" value="No Discount">
+    <input type="submit" name="banana" value="Banana">
+    <input type="submit" name="apple" value="Apple">
+</form>
+
 <?php
 
 class Article {
@@ -18,6 +24,19 @@ $wine = new Article("Bottles of wine", 2, 10);
 
 $fruits = array($banana, $apple);
 $beverages = array($wine);
+
+if (isset($_POST['banana'])) {
+    $fruits[0]->price -= 1/2 ;
+}
+if (isset($_POST['apple'])) {
+    $fruits[1]->price -= 1.5/2 ;
+}
+if (isset($_POST['nodiscount'])) {
+    $fruits[0]->price ;
+    $fruits[1]->price ;
+}
+var_dump($fruits);
+
 
 class Basket {
     public $fruits;

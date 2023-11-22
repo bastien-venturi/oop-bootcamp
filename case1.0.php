@@ -15,12 +15,11 @@ $totalAppleCost = $appleQuantity * $applePrice;
 $totalWineCost = $wineBottleQuantity * $wineBottlePrice;
 
 // Calculate the overall total cost
-$totalCost = $totalBananaCost + $totalAppleCost + $totalWineCost;
-
+$totalfruit = ($totalBananaCost + $totalAppleCost) + (($totalBananaCost + $totalAppleCost) * 6 / 100);
+$totalBeverage = $totalWineCost + ($totalWineCost * 21 / 100);
+$totalCost = $totalfruit + $totalBeverage;
 // Display the results
-echo "Total cost of bananas: €$totalBananaCost <br>";
-echo "Total cost of apples: €$totalAppleCost <br>";
-echo "Total cost of wine: €$totalWineCost <br>";
+
 echo "Overall total cost of the basket: €$totalCost <br>";
 
 ?>
