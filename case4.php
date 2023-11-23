@@ -1,94 +1,94 @@
 <?php
-class Student {
-    public $name;
-    public $grade;
+class Etudiant {
+    public $nom; // Nom de l'étudiant
+    public $note; // Note de l'étudiant
 
-    function __construct($name, $grade) {
-        $this->name = $name;
-        $this->grade = $grade;
+    function __construct($nom, $note) {
+        $this->nom = $nom;
+        $this->note = $note;
     }
 }
 
-class StudentGroup {
-    public $students;
+class GroupeEtudiants {
+    public $etudiants; // Liste des étudiants dans le groupe
 
-    function __construct($students) {
-        $this->students = $students;
+    function __construct($etudiants) {
+        $this->etudiants = $etudiants;
     }
 
-    function calculateAverage() {
+    function calculerMoyenne() {
         $total = 0;
-        $count = count($this->students);
+        $nombre = count($this->etudiants);
 
-        foreach ($this->students as $student) {
-            $total += $student->grade;
+        foreach ($this->etudiants as $etudiant) {
+            $total += $etudiant->note;
         }
 
-        $average = $count > 0 ? $total / $count : 0;
+        $moyenne = $nombre > 0 ? $total / $nombre : 0;
 
-        return $average;
+        return $moyenne;
     }
 
-    function moveStudent($student, $destinationGroup) {
-        $key = array_search($student, $this->students, true);
-        if ($key !== false) {
-            unset($this->students[$key]);
+    function deplacerEtudiant($etudiant, $groupeDestination) {
+        $cle = array_search($etudiant, $this->etudiants, true);
+        if ($cle !== false) {
+            unset($this->etudiants[$cle]);
         }
 
-        $destinationGroup->students[] = $student;
+        $groupeDestination->etudiants[] = $etudiant;
     }
 }
 
-$student1 = new Student("John", 85);
-$student2 = new Student("Jane", 92);
-$student3 = new Student("Bob", 78);
-$student4 = new Student("Alice", 89);
-$student5 = new Student("Charlie", 95);
-$student6 = new Student("David", 80);
-$student7 = new Student("Eva", 88);
-$student8 = new Student("Frank", 76);
-$student9 = new Student("Grace", 94);
-$student10 = new Student("Hank", 81);
-$student11 = new Student("Ivy", 87);
-$student12 = new Student("Jack", 91);
-$student13 = new Student("Karen", 79);
-$student14 = new Student("Leo", 93);
-$student15 = new Student("Mia", 82);
-$student16 = new Student("Nathan", 90);
-$student17 = new Student("Olivia", 84);
-$student18 = new Student("Peter", 77);
-$student19 = new Student("Quinn", 96);
-$student20 = new Student("Rachel", 83);
+$etudiant1 = new Etudiant("John", 85);
+$etudiant2 = new Etudiant("Jane", 92);
+$etudiant3 = new Etudiant("Bob", 78);
+$etudiant4 = new Etudiant("Alice", 89);
+$etudiant5 = new Etudiant("Charlie", 95);
+$etudiant6 = new Etudiant("David", 80);
+$etudiant7 = new Etudiant("Eva", 88);
+$etudiant8 = new Etudiant("Frank", 76);
+$etudiant9 = new Etudiant("Grace", 94);
+$etudiant10 = new Etudiant("Hank", 81);
+$etudiant11 = new Etudiant("Ivy", 87);
+$etudiant12 = new Etudiant("Jack", 91);
+$etudiant13 = new Etudiant("Karen", 79);
+$etudiant14 = new Etudiant("Leo", 93);
+$etudiant15 = new Etudiant("Mia", 82);
+$etudiant16 = new Etudiant("Nathan", 90);
+$etudiant17 = new Etudiant("Olivia", 84);
+$etudiant18 = new Etudiant("Peter", 77);
+$etudiant19 = new Etudiant("Quinn", 96);
+$etudiant20 = new Etudiant("Rachel", 83);
 
-$group1 = new StudentGroup([$student1, $student2, $student3, $student4, $student5, $student6, $student7, $student8, $student9, $student10]);
-$group2 = new StudentGroup([$student11, $student12, $student13, $student14, $student15, $student16, $student17, $student18, $student19, $student20]);
+$groupe1 = new GroupeEtudiants([$etudiant1, $etudiant2, $etudiant3, $etudiant4, $etudiant5, $etudiant6, $etudiant7, $etudiant8, $etudiant9, $etudiant10]);
+$groupe2 = new GroupeEtudiants([$etudiant11, $etudiant12, $etudiant13, $etudiant14, $etudiant15, $etudiant16, $etudiant17, $etudiant18, $etudiant19, $etudiant20]);
 
-echo "Average for Group 1: " . $group1->calculateAverage() . "<br>";
-echo "Average for Group 2: " . $group2->calculateAverage() . "<br>";
+echo "Moyenne pour le Groupe 1 : " . $groupe1->calculerMoyenne() . "<br>";
+echo "Moyenne pour le Groupe 2 : " . $groupe2->calculerMoyenne() . "<br>";
 
-// Sort the students in Group 1 based on grades in descending order
-usort($group1->students, function ($a, $b) {
-    return $b->grade - $a->grade;
+// Trier les étudiants du Groupe 1 en fonction des notes par ordre décroissant
+usort($groupe1->etudiants, function ($a, $b) {
+    return $b->note - $a->note;
 });
 
-// Get the top student in Group 1
-$topStudentGroup1 = array_shift($group1->students);
+// Obtenir le meilleur étudiant du Groupe 1
+$meilleurEtudiantGroupe1 = array_shift($groupe1->etudiants);
 
-// Sort the students in Group 2 based on grades in ascending order
-usort($group2->students, function ($a, $b) {
-    return $a->grade - $b->grade;
+// Trier les étudiants du Groupe 2 en fonction des notes par ordre croissant
+usort($groupe2->etudiants, function ($a, $b) {
+    return $a->note - $b->note;
 });
 
-// Get the lowest grade student in Group 2
-$lowestGradeStudentGroup2 = array_shift($group2->students);
+// Obtenir l'étudiant avec la note la plus basse du Groupe 2
+$etudiantNoteLaPlusBasseGroupe2 = array_shift($groupe2->etudiants);
 
-// Check if there is a top student in Group 1 and a student in Group 2 before moving
-if ($topStudentGroup1 && $lowestGradeStudentGroup2) {
-    $group1->moveStudent($topStudentGroup1, $group2);
+// Vérifier s'il y a un meilleur étudiant dans le Groupe 1 et un étudiant dans le Groupe 2 avant de déplacer
+if ($meilleurEtudiantGroupe1 && $etudiantNoteLaPlusBasseGroupe2) {
+    $groupe1->deplacerEtudiant($meilleurEtudiantGroupe1, $groupe2);
 }
 
-echo "<br>After moving the top student from Group 1 to Group 2:<br>";
-echo "Average for Group 1: " . $group1->calculateAverage() . "<br>";
-echo "Average for Group 2: " . $group2->calculateAverage() . "<br>";
+echo "<br>Après avoir déplacé le meilleur étudiant du Groupe 1 vers le Groupe 2:<br>";
+echo "Moyenne pour le Groupe 1 : " . $groupe1->calculerMoyenne() . "<br>";
+echo "Moyenne pour le Groupe 2 : " . $groupe2->calculerMoyenne() . "<br>";
 
 ?>
